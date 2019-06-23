@@ -1,7 +1,12 @@
 from graphics import *
+import time
 import math
+import time
 
 def main():
+
+
+    timme = time.localtime()
 
     size = 800 #Storleken på fönstret
     center = size/2-1 #Centrum på fönstret
@@ -39,15 +44,25 @@ def main():
         line.setFill("white")
         line.draw(win)
 
-    midpoint = Circle(centerPoint, 6)
-    midpoint.setFill("white")
-    midpoint.draw(win)
 
     while True:
 
         j = i/12
+        k = j/12
 
-        minAngle= i*math.pi
+        secAngle= i*math.pi
+        secLength = 200
+
+        secTop = Point(center+secLength*math.cos(secAngle+offset),
+            center-secLength*math.sin(secAngle+offset))
+        secVisare = Line(centerPoint, secTop)
+
+        secVisare.setWidth(2)
+        secVisare.setFill("red")
+        secVisare.draw(win)
+
+
+        minAngle= j*math.pi
         minLength = 200
 
         minTop = Point(center+minLength*math.cos(minAngle+offset),
@@ -58,7 +73,7 @@ def main():
         minVisare.setFill("white")
         minVisare.draw(win)
 
-        timAngle= j*math.pi
+        timAngle= k*math.pi
         timLength = 150
 
         timTop = Point(center+timLength*math.cos(timAngle+offset),
@@ -69,11 +84,20 @@ def main():
         timVisare.setFill("white")
         timVisare.draw(win)
 
+        midpoint = Circle(centerPoint, 8)
+        midpoint.setFill("white")
+        midpoint.draw(win)
+
         i-=0.01
+
         win.update()
         time.sleep(0.01)
+
+        secVisare.undraw()
         minVisare.undraw()
         timVisare.undraw()
+
+        midpoint.undraw()
 
 
     win.getMouse() # Pause to view result
